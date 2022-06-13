@@ -1,0 +1,42 @@
+body {
+  -ms-overflow-style: none;
+}
+
+body {
+  background-color: #3c3c3c;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+.vedio {
+  width: 800px;
+  height: 80%;
+  right: 40px;
+  top: 30px;
+  font-size: 40px;
+  color: #666667;
+  cursor: pointer;
+}
+#watch {
+  video {
+    width: 100%;
+    height: auto;
+    margin:0 auto;
+    display:block;  
+  }
+  .watch__text{
+    display: block;
+    background-color: #ffffff;
+    width: 80%;
+    height: 80vh;
+    margin:0 auto;
+  }
+}
+
+
