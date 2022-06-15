@@ -1,5 +1,5 @@
 <template>
-<div id="watch">
+<div id="record">
   <router-link to="/" ><i class="el-icon-back setting"></i></router-link>
   <el-row    type="flex"  justify="center">
     <el-col :span="14" class="left-side">
