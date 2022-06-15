@@ -37,6 +37,41 @@ body {
     height: 80vh;
     margin:0 auto;
   }
+  .watch__menu{
+    text-align: left;
+
+  }
+  .watch__button{
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+  .watch__stop{
+    width: 100%;
+    height: 100%;
+    background-color: #E09B33;
+  }
+  .watch__play{
+    margin-left: 9px;
+    width: 0;
+    height: 0;
+    border-bottom: 40px solid transparent;
+    border-top: 40px solid transparent;
+    border-left: 60px solid #EA3D32;
+    border-right: 60px solid transparent;
+  }
+  .watch__pause{
+    display: inline-block;
+    width: 30%;
+    margin-right: 20%;
+    height: 100%;
+    background-color: #56BD66;
+  }
+  .watch_deactivate{
+    background-color: #ababab;
+  }
 }
 
 
