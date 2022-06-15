@@ -1,11 +1,11 @@
 <template>
     <div class="menu-bottom">
-        <el-col :span="14" >
+        <el-col :span="16" >
             <thumbnail></thumbnail>
         </el-col>
-        <el-col :span="10">
+        <el-col :span="8">
         <div class="menu-bottom__button">
-            <button>다시찍기</button>
+            <button>재촬영</button>
             <button>저장</button>
         </div>
         </el-col>

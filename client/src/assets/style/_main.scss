@@ -1,3 +1,4 @@
+
 body {
   -ms-overflow-style: none;
   background-color: #202020
@@ -10,7 +11,12 @@ video {
 }
 img{
   width: 100%;
+  aspect-ratio: 4 / 3; 
+  object-fit: cover;
   background-size: cover;
+}
+.back{
+  color:#dddddd
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,7 +24,18 @@ img{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+}
+.logo{
+  text-align: left;
+  margin-bottom: 10px;
+}
+.logo h2{
+  color: #605f5f;  
+}
+.rigth{
+  float: right;
+  margin-right: 20%;
 }
 #watch {
   .card-list{
@@ -28,7 +45,6 @@ img{
     margin:0 auto;
   }
   .card{
-    color:#ffffff;
     display: block;
     width: 90%;
     height: 20%;
@@ -41,83 +57,115 @@ img{
     color: #aaaaaa;
     font-size: 10px;
   }
+  .card__title{
+    color:#ffffff;
+  }
+  .plus-button{
+    background-color: inherit;
+    border: 1px solid #605f5f;  
+    border-radius: 2px;
+    color:#ffffff;
+    width: 100px;
+    height: 30px;
+
+  }
+  .plus-button i{
+    font-size: 18px;
+    color:#eb5c4e;
+    margin-right: 2px;
+  }
 }
 
 #record {
-  .watch__text{
+  .md-script{
+    text-align: left;
+    padding: 15px 20px;
     display: block;
-    background-color: #ffffff;
+    background-color: #282828;
+    color:#ffffff;
     width: 80%;
     height: 80vh;
     margin:0 auto;
   }
-  .watch__control{
+  /**/
+  .record__control{
     text-align: left;
-
   }
-  .watch__button{
-    width: 80px;
-    height: 80px;
+  .record__button{
+    width: 60px;
+    height: 60px;
     display: inline-block;
     margin-top: 20px;
     margin-right: 20px;
   }
-  .watch__stop{
+  .record__stop{
     width: 100%;
     height: 100%;
     background-color: #E09B33;
   }
-  .watch__play{
+  .record__play{
     margin-left: 9px;
     width: 0;
     height: 0;
-    border-bottom: 40px solid transparent;
-    border-top: 40px solid transparent;
-    border-left: 60px solid #EA3D32;
-    border-right: 60px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-top: 30px solid transparent;
+    border-left: 45px solid #EA3D32;
+    border-right: 45px solid transparent;
   }
-  .watch__pause{
+  .record__pause{
     display: inline-block;
     width: 30%;
     margin-right: 20%;
     height: 100%;
     background-color: #56BD66;
   }
-  .watch_deactivate{
+  .record_deactivate{
     background-color: #ababab;
   }
- 
+  .menu-bottom{
+    margin-top: 20px;
+  }
   .thumbnail{ 
-    background-color: #716d6d;
-    padding: 20px;
-    width: 80%;
-    height: 150px;
-    margin-top: 10px;
+    height: 120px;
+    width: 100%;
+  }
+  .thumbnail__image{
+    width: 120px;
+    margin-right: 10px;
+  }
+  .thumbnail__left{
+    text-align: left;
   }
   .thumbnail__button{
-    margin-left: 20px;
-    width: 60%;
-    height: 50px;
-    margin-top: 10px;
+    bottom: 0px;
+    width: 160px;
+    height: 40px;
+    margin-top: 52px;
     border-radius: 10px;
     color: #dddddd;
-    font-size: 30px;
+    font-size: 15px;
+    background-color: inherit;
+    border: 1px solid #605f5f;  
+    border-radius: 2px;
+    color:#ffffff;
+    padding: 5px 10px;
   }
-  .green{
-    background-color: #56BD66;
+  .thumbnail__button i{
+    //color: #5ca3f7;
+    color:#eb5c4e;
+    margin-right: 3px;
   }
-  .red{
-    background-color: #EA3D32
+  .menu-bottom__button {
+    text-align: right;
+    padding-right: 20px;
+    font-size: 15px;
   }
   .menu-bottom__button button{
-    width: 45%;
-    height: 150px;
-    margin: 2%;
-    background-color: #E09B33;
-    border: none;
-    border-radius: 10px;
-  }
-  .menu-bottom__button{
-    width: 100%;
+    width: 80px;
+    height: 80px;
+    background-color: inherit;
+    color:#ffffff;
+    margin-left: 10px;
+    border: 1px solid #605f5f; 
   }
 }

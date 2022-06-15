@@ -1,6 +1,6 @@
 <template>
-  <div class="watch__text">
-    
+  <div class="md-script">
+    운영 체제란,
   </div>
 </template>
 
