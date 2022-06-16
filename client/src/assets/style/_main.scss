@@ -98,6 +98,7 @@ img{
     display: inline-block;
     margin-top: 20px;
     margin-right: 20px;
+    cursor : pointer;
   }
   .record__stop::after{
     width: 40px;
@@ -107,7 +108,7 @@ img{
     content: "";
   }
   .record__stop.inactive::after{
-    background-color: #606060;  
+    background-color: #606060; 
   }
   .record__play::after{
     margin-left: 9px;
@@ -133,7 +134,10 @@ img{
     content: "";
   }
   .record__pause.inactive::after{
-    border-color:#606060;  
+    border-color:#606060; 
+  }
+  .inactive{
+    cursor : no-drop;
   }
   .menu-bottom{
     margin-top: 20px;
