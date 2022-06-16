@@ -9,9 +9,9 @@
   </el-row>
   <el-row  type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <record-video></record-video>
-        <control-bottom v-if="isControlBottom"></control-bottom>
-        <menu-bottom v-else></menu-bottom>
+        <record-video :state="state" ></record-video>
+        <control-bottom v-if="state !== 'stop'" :state="state" @changeState="changeState"></control-bottom>
+        <menu-bottom v-else :state="state" @changeState="changeState" ></menu-bottom>
     </el-col>
     <el-col :span="8">
       <md-script> </md-script> 
@@ -35,21 +35,23 @@ export default {
   },
   data(){
     return{
-      isControlBottom:false,
+      isControlBottom:true,
       editor:null,
       chunks:[],
-      
+      state: 'ready'
     }
   },
   mounted(){
-
 
   },
   created(){
    
   },
   methods: {
-    test() {}
+    changeState(nextState){
+      this.state = nextState;
+
+    }
   },
 }
 </script>

@@ -98,29 +98,41 @@ img{
     margin-top: 20px;
     margin-right: 20px;
   }
-  .record__stop{
-    width: 100%;
-    height: 100%;
+  .record__stop::after{
+    width: 60px;
+    height: 60px;
     background-color: #E09B33;
+    display: inline-block;
+    content: "";
   }
-  .record__play{
+  .record__stop.inactive::after{
+    background-color: #ababab;
+  }
+  .record__play::after{
     margin-left: 9px;
     width: 0;
     height: 0;
     border-bottom: 30px solid transparent;
     border-top: 30px solid transparent;
-    border-left: 45px solid #EA3D32;
     border-right: 45px solid transparent;
-  }
-  .record__pause{
+    border-left: 45px solid #EA3D32;
+    content: "";
     display: inline-block;
-    width: 30%;
-    margin-right: 20%;
-    height: 100%;
-    background-color: #56BD66;
   }
-  .record_deactivate{
-    background-color: #ababab;
+  .record__play.inactive::after{
+    border-left: 45px solid #ababab;
+  }
+  .record__pause::after{
+    width: 60px;
+    height: 60px;
+    border-color:#56BD66;;
+    border-style:double;
+    border-width:0 0 0 60px;
+    display: inline-block;
+    content: "";
+  }
+  .record__pause.inactive::after{
+    border-color:#ababab;
   }
   .menu-bottom{
     margin-top: 20px;

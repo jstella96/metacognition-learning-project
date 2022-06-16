@@ -5,7 +5,7 @@
         </el-col>
         <el-col :span="8">
         <div class="menu-bottom__button">
-            <button>재촬영</button>
+            <button @click="changeState('ready')">재촬영</button>
             <button>저장</button>
         </div>
         </el-col>
@@ -20,6 +20,9 @@ export default {
   components: { 
     "thumbnail":Thumbnail,
   },
+  props: {
+    state: String
+  },
   data(){
     return{
       
@@ -33,7 +36,9 @@ export default {
    
   },
   methods: {
-
+      changeState(nextState){
+        this.$emit('changeState',nextState);
+    },
   },
 }
 </script>
