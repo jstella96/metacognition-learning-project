@@ -2,24 +2,12 @@
 <div class="record__control">
     <div class="record__button record__play" :class="showInActive('play')" @click="changeState($event,'play')"></div>
     <div class="record__button record__pause" :class="showInActive('pause')" @click="changeState($event,'pause')"></div>
-    <div class="record__button record__stop"  :class="showInActive('stop')" @click="changeState($event,'ready')"></div>
+    <div class="record__button record__stop"  :class="showInActive('stop')" @click="changeState($event,'stop')"></div>
 </div>
 </template>
 <script>
 export default {
   name: 'ControlBottom',
-  data(){
-    return{
-      
-    }
-  },
-  mounted(){
-
-
-  },
-  computed: {
-
-  },
   props: {
     state: String
   },
@@ -31,7 +19,7 @@ export default {
     },
     showInActive(option){
         let nextClass = 'inactive';
-        if( option === 'play' && ( this.state === 'ready' || this.state === 'pause' ) ){
+        if( option === 'play' && ( this.state === 'ready' || this.state === 'pause' ||  this.state === 'stop') ){
             nextClass = '';
         }else if( option === 'pause' && this.state === 'play'){
             nextClass = '';

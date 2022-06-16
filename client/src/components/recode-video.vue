@@ -1,57 +1,58 @@
 <template>
     <div>
-        <video class="video" controls  id="record-video" ></video>
+        <video class="video" controls id="record-video" ></video>
     </div>
 </template>
 
 <script>
 
+
 export default {
   name: 'RecodeVideo',
   data(){
     return{
-        streaming : false, 
         $video  :  null,
         stream : null,
         chunks : [],
         mediaRecorder  : null,
-        mimeType : "video/webm",
         options : {
-        audioBitsPerSecond : 128000,
-        videoBitsPerSecond : 2500000,
-        mimeType : this.mimeType 
+          audioBitsPerSecond : 128000,
+          videoBitsPerSecond : 2500000,
+          mimeType : "video/webm" 
         }
     }
+  },
+  props: {
+    state: String
   },
   mounted(){
     this.startup();
   },
   methods: {
     async startup(){
+        this.chunks = [];
         this.$video = document.getElementById('record-video');
-        this.stream = await this.getMedia(this.$video);
+        this.$video.controls = false;
+        await this.getMedia(this.$video);
      },
     async getMedia(){ 
       const constraints = { video: true, audio: {echoCancellation: true} };
-      let stream = null;
       try {
-        stream = await navigator.mediaDevices.getUserMedia(constraints);
-        this.$video.srcObject = stream;
+        this.stream = await navigator.mediaDevices.getUserMedia(constraints);
+        this.$video.srcObject = this.stream;
         this.$video.play();
-        return stream;
       } catch(err) {
         console.log(err)
       }
     },
     start(){
       this.mediaRecorder = new MediaRecorder(this.stream,this.options);
-      this.mediaRecorder.ondataavailable = function(event){
+      this.mediaRecorder.ondataavailable = (event) => {
         if(event.data && event.data.size > 0){
            this.chunks.push(event.data);
         }
       }
-   
-      this.mediaRecorder.onstop = function() {
+      this.mediaRecorder.onstop =  () => {
         const blob = new Blob(this.chunks, { 'type' : "video/webm"});
         const objectURL = window.URL.createObjectURL(blob);
         this.$video.srcObject = null;
@@ -62,22 +63,37 @@ export default {
     },
 
     pause(){
-      if(!this.mediaRecorder) return;
-      console.log('recordPause')
-      this.mediaRecorder.pause();
+      if(this.mediaRecorder){
+        this.mediaRecorder.pause();
+      }
     },
 
     resume(){
       this.mediaRecorder.resume();
-      console.log('recordResume')
     },
     
     stop(){
-      if(!this.mediaRecorder) return;
+      if(this.mediaRecorder){
         this.mediaRecorder.stop();
         this.mediaRecorder = null;
-        console.log('recoredStop')
+        this.$video.controls = true;
+      }
     }
   },
+  watch: {
+    state(nextState,prevState){
+      if(nextState === 'ready'){
+        this.startup();
+      }if(nextState === 'play' && prevState === "pause"){
+        this.resume();
+      }else if(nextState === 'play'){
+        this.start()
+      }else if(nextState === 'pause'){
+        this.pause()
+      }else if(nextState === 'stop'){
+        this.stop()
+      }
+    }
+  }
 }
 </script>
