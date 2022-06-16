@@ -2,9 +2,11 @@
 <div id="record">
   <el-row type="flex"  justify="center">
     <el-col :span="22" class="logo">
+    <el-col :span="4">
      <router-link to="/" >
         <h2>LOGO</h2>
       </router-link>
+     </el-col> 
     </el-col>
   </el-row>
   <el-row  type="flex"  justify="center">

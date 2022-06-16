@@ -42,7 +42,7 @@ img{
   .card-list{
     background-color: #181818;
     width: 90%;
-    height: 90vh;
+    height: 88vh;
     margin:0 auto;
   }
   .card{
@@ -78,32 +78,57 @@ img{
 }
 
 #record {
-  .md-script{
-    text-align: left;
-    padding: 15px 20px;
-    display: block;
-    background-color: #181818;
-    color:#ffffff;
-    width: 80%;
-    height: 80vh;
+  .md{
+    position: relative;
+    width: 90%;
     margin:0 auto;
   }
-  /**/
+  .md-button{
+    position: absolute;
+    right:0px;
+    top:4px;
+    background-color: inherit;
+    color: #aaaaaa;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .md-text{
+    box-sizing: border-box;
+    background-color: #181818;
+    color:#ffffff;
+    height: 88vh;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 14px;
+    -ms-overflow-style: none;
+  }
+  .md-preview{
+    overflow:auto;
+    text-align: left;
+  }
+  .md-write{
+    border:none;
+    resize: none;
+  }
+  .md-text::-webkit-scrollbar{
+    display:none;
+  }
   .record__control{
     text-align: left;
   }
   .record__button{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: inline-block;
     margin-top: 20px;
     margin-right: 20px;
     cursor : pointer;
   }
   .record__stop::after{
-    width: 40px;
-    height: 40px;
-    background-color: #E09B33;
+    width: 30px;
+    height: 30px;
+    background-color:  #5ca3f7;
     display: inline-block;
     content: "";
   }
@@ -114,22 +139,22 @@ img{
     margin-left: 9px;
     width: 0;
     height: 0;
-    border-bottom: 20px solid transparent;
-    border-top: 20px solid transparent;
-    border-right: 30px solid transparent;
-    border-left: 30px solid #EA3D32;
+    border-bottom: 15px solid transparent;
+    border-top: 15px solid transparent;
+    border-right: 24px solid transparent;
+    border-left: 24px solid #EA3D32;
     content: "";
     display: inline-block;
   }
   .record__play.inactive::after{
-    border-left: 30px solid #606060;  
+    border-left: 24px solid #606060;  
   }
   .record__pause::after{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-color:#56BD66;;
     border-style:double;
-    border-width:0 0 0 40px;
+    border-width:0 0 0 30px;
     display: inline-block;
     content: "";
   }
