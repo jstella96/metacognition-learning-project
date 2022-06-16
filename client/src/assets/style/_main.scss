@@ -98,28 +98,34 @@ img{
     margin-top: 20px;
     margin-right: 20px;
   }
-  .record__stop{
+  .record__stop div{
     width: 100%;
     height: 100%;
     background-color: #E09B33;
   }
-  .record__play{
+  .record__stop.inactive div{
+    background-color: #ababab;
+  }
+  .record__play div{
     margin-left: 9px;
     width: 0;
     height: 0;
     border-bottom: 30px solid transparent;
     border-top: 30px solid transparent;
-    border-left: 45px solid #EA3D32;
     border-right: 45px solid transparent;
+    border-left: 45px solid #EA3D32;
   }
-  .record__pause{
+  .record__play.inactive div{
+    border-left: 45px solid #ababab;
+  }
+  .record__pause div{
     display: inline-block;
     width: 30%;
     margin-right: 20%;
     height: 100%;
     background-color: #56BD66;
   }
-  .record_deactivate{
+  .record__pause.inactive div{
     background-color: #ababab;
   }
   .menu-bottom{

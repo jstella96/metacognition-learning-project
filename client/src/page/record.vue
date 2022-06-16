@@ -10,7 +10,7 @@
   <el-row  type="flex"  justify="center">
     <el-col :span="14" class="left-side">
         <record-video></record-video>
-        <control-bottom v-if="isControlBottom"></control-bottom>
+        <control-bottom v-if="isControlBottom" :state="state" @changeState="changeState"></control-bottom>
         <menu-bottom v-else></menu-bottom>
     </el-col>
     <el-col :span="8">
@@ -35,21 +35,23 @@ export default {
   },
   data(){
     return{
-      isControlBottom:false,
+      isControlBottom:true,
       editor:null,
       chunks:[],
-      
+      state: 'ready'
     }
   },
   mounted(){
-
 
   },
   created(){
    
   },
   methods: {
-    test() {}
+    test() {},
+    changeState(nextState){
+      this.state = nextState;
+    }
   },
 }
 </script>
