@@ -115,20 +115,24 @@ img{
     display:none;
   }
   .record__control{
-    text-align: left;
+    text-align: center;
+  }
+  .record__label{
+    margin-right: 10px;
   }
   .record__button{
     width: 30px;
     height: 30px;
     display: inline-block;
     margin-top: 20px;
-    margin-right: 20px;
+    margin-right: 10px;
     cursor : pointer;
+    margin-left: 5px;
   }
   .record__stop::after{
     width: 30px;
     height: 30px;
-    background-color:  #5ca3f7;
+    background-color: #606060;  
     display: inline-block;
     content: "";
   }
@@ -136,13 +140,12 @@ img{
     background-color: #606060; 
   }
   .record__play::after{
-    margin-left: 9px;
     width: 0;
     height: 0;
     border-bottom: 15px solid transparent;
     border-top: 15px solid transparent;
-    border-right: 24px solid transparent;
-    border-left: 24px solid #EA3D32;
+    border-right: 25px solid transparent;
+    border-left: 25px solid #EA3D32;
     content: "";
     display: inline-block;
   }
@@ -152,7 +155,7 @@ img{
   .record__pause::after{
     width: 30px;
     height: 30px;
-    border-color:#56BD66;;
+    border-color:#EA3D32;
     border-style:double;
     border-width:0 0 0 30px;
     display: inline-block;
