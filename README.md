@@ -5,5 +5,7 @@
 📌 프로젝트 시작 동기 : 공부했던 내용을 말로 설명할 수 없을 때가 많아서 메타인지가 되어있지 않다는 생각을 하였다. 직접 말로 설명하고 확인함으로써 나의 이해도를 측정해볼 수 있는 플랫폼이 있으면 좋겠다고 생각했다. 타 영상 사이트와 차별화되어 스터디에 초점이 맞춰져 있고 영상의 녹화와 저장이 최대한 단순하게 이루어질 수 있도록 개발할 예정이다.
 
 ## Stack
-front-end : Vue  
-back-end: AWS Lambda 
+front-end: Vue    
+back-end: AWS Lambda   
+db: AWS Dynamodb  
+storage: AWS S3  
