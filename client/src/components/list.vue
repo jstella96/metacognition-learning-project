@@ -24,7 +24,7 @@
                 </el-col>
                 <el-col :span="16" >
                    <div class="card__title">
-                        <h3>교착상태란 무엇인가</h3>
+                        <h3>이벤트 스트림이란 무엇인가</h3>
                    </div>
                     <div class="card__info">
                         <span>2022-04-25</span> | <span>2분23초</span>
