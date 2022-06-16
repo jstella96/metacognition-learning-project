@@ -42,7 +42,7 @@ img{
   .card-list{
     background-color: #181818;
     width: 90%;
-    height: 90vh;
+    height: 88vh;
     margin:0 auto;
   }
   .card{
@@ -78,62 +78,94 @@ img{
 }
 
 #record {
-  .md-script{
-    text-align: left;
-    padding: 15px 20px;
-    display: block;
-    background-color: #181818;
-    color:#ffffff;
-    width: 80%;
-    height: 80vh;
+  .md{
+    position: relative;
+    width: 90%;
     margin:0 auto;
   }
-  /**/
-  .record__control{
+  .md-button{
+    position: absolute;
+    right:0px;
+    top:4px;
+    background-color: inherit;
+    color: #aaaaaa;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .md-text{
+    box-sizing: border-box;
+    background-color: #181818;
+    color:#ffffff;
+    height: 88vh;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 14px;
+    -ms-overflow-style: none;
+  }
+  .md-preview{
+    overflow:auto;
     text-align: left;
   }
+  .md-write{
+    border:none;
+    resize: none;
+  }
+  .md-text::-webkit-scrollbar{
+    display:none;
+  }
+  .record__control{
+    text-align: center;
+  }
+  .record__label{
+    margin-right: 10px;
+  }
   .record__button{
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     display: inline-block;
     margin-top: 20px;
-    margin-right: 20px;
+    margin-right: 10px;
+    cursor : pointer;
+    margin-left: 5px;
   }
   .record__stop::after{
-    width: 60px;
-    height: 60px;
-    background-color: #E09B33;
+    width: 30px;
+    height: 30px;
+    background-color: #606060;  
     display: inline-block;
     content: "";
   }
   .record__stop.inactive::after{
-    background-color: #606060;  
+    background-color: #606060; 
   }
   .record__play::after{
-    margin-left: 9px;
     width: 0;
     height: 0;
-    border-bottom: 30px solid transparent;
-    border-top: 30px solid transparent;
-    border-right: 45px solid transparent;
-    border-left: 45px solid #EA3D32;
+    border-bottom: 15px solid transparent;
+    border-top: 15px solid transparent;
+    border-right: 25px solid transparent;
+    border-left: 25px solid #EA3D32;
     content: "";
     display: inline-block;
   }
   .record__play.inactive::after{
-    border-left: 45px solid #606060;  
+    border-left: 24px solid #606060;  
   }
   .record__pause::after{
-    width: 60px;
-    height: 60px;
-    border-color:#56BD66;;
+    width: 30px;
+    height: 30px;
+    border-color:#EA3D32;
     border-style:double;
-    border-width:0 0 0 60px;
+    border-width:0 0 0 30px;
     display: inline-block;
     content: "";
   }
   .record__pause.inactive::after{
-    border-color:#606060;  
+    border-color:#606060; 
+  }
+  .inactive{
+    cursor : no-drop;
   }
   .menu-bottom{
     margin-top: 20px;
