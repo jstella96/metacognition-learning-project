@@ -1,15 +1,8 @@
 <template>
 <div class="record__control">
-    <div class="record__button record__play" :class="showInActive('play')" @click="changeState('play')">
-        <div></div>
-   </div>
-    <div class="record__button record__pause" :class="showInActive('pause')" @click="changeState('pause')">
-        <div></div>
-        <div></div>
-    </div>
-    <div class="record__button record__stop"  :class="showInActive('stop')" @click="changeState('ready')">
-        <div></div>
-    </div>
+    <div class="record__button record__play" :class="showInActive('play')" @click="changeState($event,'play')"></div>
+    <div class="record__button record__pause" :class="showInActive('pause')" @click="changeState($event,'pause')"></div>
+    <div class="record__button record__stop"  :class="showInActive('stop')" @click="changeState($event,'ready')"></div>
 </div>
 </template>
 <script>
@@ -31,8 +24,10 @@ export default {
     state: String
   },
   methods: {
-    changeState(nextState){
-        this.$emit('changeState',nextState);
+    changeState(event,nextState){
+        if(!event.target.classList.contains('inactive')){
+            this.$emit('changeState',nextState);
+        }
     },
     showInActive(option){
         let nextClass = 'inactive';
