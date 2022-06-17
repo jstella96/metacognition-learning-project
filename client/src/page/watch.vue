@@ -12,7 +12,7 @@
   </el-row>
   <el-row type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <record-video></record-video>
+        <basic-video></basic-video>
     </el-col>
     <el-col :span="8">
       <list> </list> 
@@ -21,13 +21,15 @@
 </div>
 </template>
 <script>
+
 import List from '../components/list.vue'
-import RecordVideo from '../components/recode-video.vue'
+import BasicVideo from '../components/basic-video.vue'
 export default {
   name: 'Watch',
   components: { 
     "list" : List,
-    "record-video":RecordVideo,
+    "basic-video":BasicVideo,
+    
   },
   data(){
     return{
@@ -38,14 +40,16 @@ export default {
     }
   },
   mounted(){
-
+    this.startup()
 
   },
   created(){
-   
+
   },
   methods: {
-    test() {}
+    startup(){
+
+    }
   },
 }
 </script>

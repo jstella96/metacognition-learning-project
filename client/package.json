@@ -11,13 +11,15 @@
     "aws-sdk": "^2.1062.0",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "dotenv": "^16.0.1",
     "element-ui": "^2.15.6",
     "marked": "^4.0.10",
     "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "sass-loader": "^10.2.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.3"
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

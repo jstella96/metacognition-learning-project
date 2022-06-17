@@ -32,7 +32,7 @@ export default {
     markdown(event){
       this.text = event.target.value;
       this.mdHtml = marked.parse(this.text)
-      console.log(this.mdHtml)
+
     },
     changeMode(){
       this.isPreview = !this.isPreview;

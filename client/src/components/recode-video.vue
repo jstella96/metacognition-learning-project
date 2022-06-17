@@ -6,6 +6,8 @@
 
 <script>
 
+// import axios from 'axios'
+import AWS from 'aws-sdk'
 
 export default {
   name: 'RecodeVideo',
@@ -15,6 +17,7 @@ export default {
         stream : null,
         chunks : [],
         mediaRecorder  : null,
+        blob : null, 
         options : {
           audioBitsPerSecond : 128000,
           videoBitsPerSecond : 2500000,
@@ -31,6 +34,7 @@ export default {
   methods: {
     async startup(){
         this.chunks = [];
+        this.blob = null
         this.$video = document.getElementById('record-video');
         this.$video.controls = false;
         await this.getMedia(this.$video);
@@ -53,8 +57,8 @@ export default {
         }
       }
       this.mediaRecorder.onstop =  () => {
-        const blob = new Blob(this.chunks, { 'type' : "video/webm"});
-        const objectURL = window.URL.createObjectURL(blob);
+        this.blob = new Blob(this.chunks, { 'type' : "video/webm"});
+        const objectURL = window.URL.createObjectURL(this.blob);
         this.$video.srcObject = null;
         this.$video.src = null;
         this.$video.src = objectURL;
@@ -78,7 +82,39 @@ export default {
         this.mediaRecorder = null;
         this.$video.controls = true;
       }
-    }
+    },
+     upload(){
+      AWS.config.update({
+        region: process.env.VUE_APP_BUCKET_REGION,
+        credentials: new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID
+        })
+      });
+
+      const s3 = new AWS.S3({
+        apiVersion: '2006-03-01',
+        params: {Bucket: process.env.VUE_APP_BUCKET_NAME}
+      });
+
+      const fileName = `${new Date().getTime()}.webm`
+       s3.upload({
+        Key: fileName,
+        Body: this.blob,
+        ACL: 'public-read'
+        }, (err, data) => {
+        if (err) {
+          console.log(err)
+          return alert('There was an error uploading your photo: ', err.message);
+        }
+        console.log(data)
+        const id = data.Key.split('.')[0];
+        //this.$router.go('./')
+        //여기서 또 통신 lamda로
+        this.$router.replace(`watch/${id}`)
+        console.log('Successfully uploaded photo.');
+
+      });
+    },
   },
   watch: {
     state(nextState,prevState){
@@ -92,6 +128,8 @@ export default {
         this.pause()
       }else if(nextState === 'stop'){
         this.stop()
+      }else if(nextState === 'upload'){
+        this.upload()
       }
     }
   }

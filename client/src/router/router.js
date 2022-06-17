@@ -10,9 +10,14 @@ export default new VueRouter({
   routes: [
       {
           path: "/",
-          name: "watch",
+          name: "home",
           component: watch
       },
+      {
+        path: "/watch/:id",
+        name: "watch",
+        component: watch
+       },
       {
         path: "/record",
         name: "record",

@@ -6,7 +6,7 @@
         <el-col :span="8">
         <div class="menu-bottom__button">
             <button @click="changeState('ready')">재촬영</button>
-            <button>저장</button>
+            <button @click="changeState('upload')">저장</button>
         </div>
         </el-col>
     </div>
