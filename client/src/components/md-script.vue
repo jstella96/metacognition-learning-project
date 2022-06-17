@@ -16,19 +16,23 @@ export default {
   data(){
     return{
       mdHtml : '',
-      text: '',
-      isPreview: false
+      isPreview: false,
+      text: ''
     }
   },
-  // props: {
-  //   text: String
-  // },
+  props: {
+    desc: String
+  },
   computed: {
-    // convertToMarkdown(){
-    //   return marked.parse('# dd')
-    // }
+
+  },
+  created(){
+    this.startup();
   },
   methods: {
+    startup(){
+      this.text = this.desc;
+    },
     markdown(event){
       this.text = event.target.value;
       this.mdHtml = marked.parse(this.text)
@@ -36,7 +40,13 @@ export default {
     },
     changeMode(){
       this.isPreview = !this.isPreview;
-    }
+    },
+
   },
+  watch:{
+     text(nextText){
+        this.$emit("changeDesc",nextText)
+     }
+  }
 }
 </script>

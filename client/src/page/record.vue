@@ -11,12 +11,12 @@
   </el-row>
   <el-row  type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <record-video :state="state" ></record-video>
+        <record-video :state="state" @putVideoInfo="putVideoInfo"></record-video>
         <control-bottom v-if="state !== 'stop' && state !== 'upload'" :state="state" @changeState="changeState"></control-bottom>
         <menu-bottom v-else :state="state" @changeState="changeState" ></menu-bottom>
     </el-col>
     <el-col :span="8">
-      <md-script> </md-script> 
+      <md-script :text="desc" @changeDesc="changeDesc"> </md-script> 
     </el-col>
   </el-row>
 </div>
@@ -26,7 +26,7 @@ import ControlBottom from '../components/control-bottom.vue'
 import MdScript from '../components/md-script.vue'
 import RecordVideo from '../components/recode-video.vue'
 import MenuBottom from '../components/menu-bottom.vue'
-
+import axios from 'axios'
 export default {
   name: 'Watch',
   components: { 
@@ -40,7 +40,8 @@ export default {
       isControlBottom:true,
       editor:null,
       chunks:[],
-      state: 'ready'
+      state: 'ready',
+      desc: ''
     }
   },
   mounted(){
@@ -52,7 +53,23 @@ export default {
   methods: {
     changeState(nextState){
       this.state = nextState;
-    }
+    },
+    changeDesc(nextDesc){
+      this.desc = nextDesc
+    },
+    async putVideoInfo(videoKey){
+      try{
+        const desc = this.desc;
+        let id = new Date().getTime(); // uuid 로 변경
+        id = String(id)
+        const body = {id, desc, videoKey}
+        await axios.put(`/api/videos`,body);
+        this.$router.replace(`watch/${id}`)
+           }catch(err){
+        console.log(err)
+      }
+    },
   },
+
 }
 </script>

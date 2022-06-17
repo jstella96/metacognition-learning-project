@@ -6,7 +6,6 @@
 
 <script>
 
-// import axios from 'axios'
 import AWS from 'aws-sdk'
 
 export default {
@@ -104,15 +103,9 @@ export default {
         }, (err, data) => {
         if (err) {
           console.log(err)
-          return alert('There was an error uploading your photo: ', err.message);
         }
-        console.log(data)
-        const id = data.Key.split('.')[0];
-        //this.$router.go('./')
-        //여기서 또 통신 lamda로
-        this.$router.replace(`watch/${id}`)
-        console.log('Successfully uploaded photo.');
-
+        console.log(err)
+        this.$emit('putVideoInfo',data.key);
       });
     },
   },

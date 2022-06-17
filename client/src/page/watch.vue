@@ -12,7 +12,7 @@
   </el-row>
   <el-row type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <basic-video></basic-video>
+        <basic-video :videoKey="videoKey"></basic-video>
     </el-col>
     <el-col :span="8">
       <list> </list> 
@@ -21,7 +21,7 @@
 </div>
 </template>
 <script>
-
+import axios from 'axios'
 import List from '../components/list.vue'
 import BasicVideo from '../components/basic-video.vue'
 export default {
@@ -29,26 +29,34 @@ export default {
   components: { 
     "list" : List,
     "basic-video":BasicVideo,
-    
   },
   data(){
     return{
       isControlBottom:false,
       editor:null,
       chunks:[],
-      
+      videoKey: '1655458839773.webm'
     }
   },
   mounted(){
-    this.startup()
+
 
   },
   created(){
-
+    this.startup()
   },
   methods: {
-    startup(){
+    async startup(){
+      try{
+        const id = this.$route.params.id
+        if(id){
+          const response = await axios.get(`/api/videos/${id}`);
+          this.videoKey = response.data.Item.videoKey
 
+        }
+      }catch(err){
+        console.log(err)
+      }
     }
   },
 }
