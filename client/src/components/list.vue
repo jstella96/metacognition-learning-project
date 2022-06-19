@@ -1,85 +1,48 @@
 <template>
     <div class="card-list">
-        <div class="card">
+        <div class="card" v-for="(video, index) in videoList" :key="index">
             <router-link to="/" >
                 <el-col :span="8" >
                 <div class="card__thumbnail"></div>
-                    <img class="img" src="../assets/image/face.png" />
+                    <img class="img" :src="getSrc(video.thumbnailKey)" />
                 </el-col>
                 <el-col :span="16" >
                    <div class="card__title">
-                        <h3>운영체제란 무엇인가</h3>
+                        <h3>{{video.title ?  video.title : '제목 없음'}}</h3>
                    </div>
                     <div class="card__info">
-                        <span>2022-04-23</span> | <span>1분28초</span>
+                        <span>{{video.createDate}}</span> | <span>1분28초</span>
                    </div>
-                </el-col>
-            </router-link>
-        </div>
-        <div class="card">
-            <router-link to="/" >
-                <el-col :span="8" >
-                <div class="card__thumbnail"></div>
-                    <img class="img" src="../assets/image/face.png" />
-                </el-col>
-                <el-col :span="16" >
-                   <div class="card__title">
-                        <h3>이벤트 스트림이란 무엇인가</h3>
-                   </div>
-                    <div class="card__info">
-                        <span>2022-04-25</span> | <span>2분23초</span>
-                   </div>
-                </el-col>
-            </router-link>
-        </div>
-         <div class="card">
-            <router-link to="/" >
-                <el-col :span="8" >
-                <div class="card__thumbnail"></div>
-                    <img class="img" src="../assets/image/face.png" />
-                </el-col>
-                <el-col :span="16" >
-                   <div class="card__title">
-                        <h3>이벤트 스트림이란 무엇인가</h3>
-                   </div>
-                    <div class="card__info">
-                        <span>2022-04-25</span> | <span>2분23초</span>
-                   </div>
-                </el-col>
-            </router-link>
-        </div>
-         <div class="card">
-            <router-link to="/" >
-                <el-col :span="8" >
-                <div class="card__thumbnail"></div>
-                    <img class="img" src="../assets/image/face.png" />
-                </el-col>
-                <el-col :span="16" >
-                   <div class="card__title">
-                        <h3>이벤트 스트림이란 무엇인가</h3>
-                   </div>
-                    <div class="card__info">
-                        <span>2022-04-25</span> | <span>2분23초</span>
-                   </div>
-                </el-col>
-            </router-link>
-        </div>
-         <div class="card">
-            <router-link to="/" >
-                <el-col :span="8" >
-                <div class="card__thumbnail"></div>
-                    <img class="img" src="../assets/image/face.png" />
-                </el-col>
-                <el-col :span="16" >
-                   <div class="card__title">
-                        <h3>이벤트 스트림이란 무엇인가</h3>
-                   </div>
-                    <div class="card__info">
-                        <span>2022-04-25</span> | <span>2분23초</span>
-                   </div>
+                   <button class="delete-button" @click="deleteVideo(video.id)"><i class="el-icon-delete"></i></button>
                 </el-col>
             </router-link>
         </div>
     </div>
 </template>
 
+<script>
+import axios from 'axios'
+export default {
+  computed:{
+
+  },
+  name: 'videoList',
+  props: {
+    videoList: Array
+  },
+  methods:{
+    getSrc(thumbnailKey){
+      return `${process.env.VUE_APP_BUCKET_POINT}/${thumbnailKey}`
+    },
+    async deleteVideo(id){
+      //백엔드에서 내부적으로 s3에 있는 데이터 이동시킴
+      try{
+            await axios.delete(`/api/videos/${id}`);
+          this.$emit("getVideos")
+      }catch(err){
+        console.log(err)
+      }
+    }
+  }
+}
+</script>

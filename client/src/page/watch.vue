@@ -19,7 +19,7 @@
       <div class="right-side__header">
       <button @click="changeLeftSide" >{{ isList ? "NOTE" : "LIST" }}</button>
       </div>
-      <list v-if="isList"> </list> 
+      <list v-if="isList" :videoList="videoList" @getVideos="getVideos"> </list> 
       <md-read v-else :desc="desc"></md-read>
     </el-col>
   </el-row>
@@ -39,12 +39,13 @@ export default {
   },
   data(){
     return{
-      isList: false,
+      isList: true,
       isControlBottom:false,
+      videoList:[],
       editor:null,
       chunks:[],
-      videoKey: '1655458839773.webm',
-      desc: `# 운영체제 `
+      videoKey: '',
+      desc: ``
     }
   },
   mounted(){
@@ -53,6 +54,7 @@ export default {
   },
   created(){
     this.startup()
+    this.getVideos()
   },
   methods: {
     async startup(){
@@ -62,7 +64,19 @@ export default {
           const response = await axios.get(`/api/videos/${id}`);
           this.videoKey = response.data.Item.videoKey
           this.desc = response.data.Item.desc
+          this.isList = false;
+        }else{
+          this.isList = true;
         }
+        
+      }catch(err){
+        console.log(err)
+      }
+    },
+    async getVideos(){
+       try{
+          const response = await axios.get(`/api/videos`);
+          this.videoList = response.data.Items
       }catch(err){
         console.log(err)
       }
