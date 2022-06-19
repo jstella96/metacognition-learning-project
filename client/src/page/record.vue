@@ -1,13 +1,11 @@
 <template>
 <div id="record">
-  <el-row type="flex"  justify="center">
-    <el-col :span="22" class="logo">
-    <el-col :span="4">
+  <el-row type="flex"   class="header">
+    <el-col :span="4" class="logo">
      <router-link to="/" >
         <h2>LOGO</h2>
       </router-link>
      </el-col> 
-    </el-col>
   </el-row>
   <el-row  type="flex"  justify="center">
     <el-col :span="14" class="left-side">
@@ -16,6 +14,7 @@
         <menu-bottom v-else :state="state" @changeState="changeState" ></menu-bottom>
     </el-col>
     <el-col :span="8">
+
       <md-script :text="desc" @changeDesc="changeDesc"> </md-script> 
     </el-col>
   </el-row>
