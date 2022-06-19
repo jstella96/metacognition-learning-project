@@ -74,6 +74,7 @@ img{
     }
   }
 }
+
 .md-read{
   box-sizing: border-box;
   background-color: #181818;
@@ -115,9 +116,28 @@ img{
 }
 
 #record {
+  .right-input{
+    box-sizing: border-box;
+    text-align: left;
+    margin-bottom: 10px;
+    width: 100%;
+
+  }
+  .right-input input{
+    box-sizing: border-box;
+    width: 100%;
+    background-color: inherit;
+    border: none;
+    color:#ffffff;
+    padding: 5px 15px;
+
+  }
+  .right-input input:focus{
+    border: 1.5px solid #ffffff;  
+    border-radius: 2px;
+  }
   .md{
     position: relative;
-    width: 90%;
     margin:0 auto;
   }
   .md-button{

@@ -13,8 +13,10 @@
         <control-bottom v-if="state !== 'stop' && state !== 'upload'" :state="state" @changeState="changeState"></control-bottom>
         <menu-bottom v-else :state="state" @changeState="changeState" ></menu-bottom>
     </el-col>
-    <el-col :span="8">
-
+    <el-col :span="8" class="right-side">
+      <div class= "right-input">
+        <input  placeholder="제목을 입력해주세요" value="title" />
+      </div>
       <md-script :text="desc" @changeDesc="changeDesc"> </md-script> 
     </el-col>
   </el-row>
@@ -40,7 +42,8 @@ export default {
       editor:null,
       chunks:[],
       state: 'ready',
-      desc: ''
+      desc: '',
+      title:''
     }
   },
   mounted(){
@@ -59,9 +62,10 @@ export default {
     async putVideoInfo(videoKey){
       try{
         const desc = this.desc;
+        const title = this.title;
         let id = new Date().getTime(); // uuid 로 변경
         id = String(id)
-        const body = {id, desc, videoKey}
+        const body = {id, desc, videoKey, title}
         await axios.put(`/api/videos`,body);
         this.$router.replace(`watch/${id}`)
            }catch(err){
