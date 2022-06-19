@@ -1,7 +1,14 @@
 <template>
     <div class="menu-bottom">
         <el-col :span="16" >
-            <thumbnail></thumbnail>
+          <div class="thumbnail">
+            <el-col :span="8"  class="thumbnail__image" >
+                <canvas id="canvas"></canvas>
+            </el-col>
+            <el-col :span="16" class="thumbnail__left">
+                <button @click="captureThumbnail" class="thumbnail__button"><i class="el-icon-magic-stick"></i>썸네일 제작</button>
+            </el-col>
+          </div>
         </el-col>
         <el-col :span="8">
         <div class="menu-bottom__button">
@@ -13,13 +20,10 @@
 </template>
 
 <script>
-import Thumbnail from '../components/thumbnail.vue'
 
 export default {
   name: 'MenuBottom',
-  components: { 
-    "thumbnail":Thumbnail,
-  },
+
   props: {
     state: String
   },
@@ -29,13 +33,15 @@ export default {
     }
   },
   mounted(){
-
-
+    this.captureThumbnail()
   },
   created(){
    
   },
   methods: {
+      captureThumbnail() {
+        this.$emit('capture');
+      },
       changeState(nextState){
         this.$emit('changeState',nextState);
     },
