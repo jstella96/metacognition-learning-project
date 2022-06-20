@@ -12,7 +12,8 @@
   </el-row>
   <el-row type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <basic-video :videoKey="videoKey"></basic-video> 
+        <basic-video :videoKey="videoKey"></basic-video>
+        <div class="title"><h3>{{title}}</h3></div>
     </el-col>
     <el-col :span="8"  class="right-side">
       <div class="right-side__header">
@@ -75,6 +76,12 @@ export default {
        try{
         const response = await getVideos();
         this.videoList = response.data.Items
+        if(this.isList && this.videoList.length != 0){
+          const {videoKey,desc, title} = this.videoList[0];
+          this.videoKey = videoKey
+          this.desc = desc
+          this.title = title
+        }
       }catch(err){
         console.log(err)
       }

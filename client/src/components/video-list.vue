@@ -8,7 +8,7 @@
                 </el-col>
                 <el-col :span="16" >
                    <div class="card__title">
-                        <h3>{{video.title ?  video.title : '제목 없음'}}</h3>
+                        <h4>{{video.title ?  video.title : '제목 없음'}}</h4>
                    </div>
                     <div class="card__info">
                         <span>{{video.createDate}}</span> | <span>1분28초</span>
