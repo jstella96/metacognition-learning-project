@@ -23,9 +23,6 @@ export default {
   props: {
     desc: String
   },
-  computed: {
-
-  },
   created(){
     this.startup();
   },
@@ -41,7 +38,6 @@ export default {
     changeMode(){
       this.isPreview = !this.isPreview;
     },
-
   },
   watch:{
      text(nextText){

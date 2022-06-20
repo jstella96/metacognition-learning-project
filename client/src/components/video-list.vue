@@ -23,9 +23,6 @@
 <script>
 import { deleteVideo } from '../api/index.js'
 export default {
-  computed:{
-
-  },
   name: 'videoList',
   props: {
     videoList: Array

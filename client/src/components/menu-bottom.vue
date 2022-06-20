@@ -23,20 +23,11 @@
 
 export default {
   name: 'MenuBottom',
-
   props: {
     state: String
   },
-  data(){
-    return{
-      
-    }
-  },
   mounted(){
     this.captureThumbnail()
-  },
-  created(){
-   
   },
   methods: {
       captureThumbnail() {

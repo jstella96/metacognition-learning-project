@@ -12,14 +12,13 @@
   </el-row>
   <el-row type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <basic-video :videoKey="videoKey"></basic-video>
-            
+        <basic-video :videoKey="videoKey"></basic-video> 
     </el-col>
     <el-col :span="8"  class="right-side">
       <div class="right-side__header">
       <button @click="changeLeftSide" >{{ isList ? "NOTE" : "LIST" }}</button>
       </div>
-      <list v-if="isList" :videoList="videoList" @getVideoList="getVideoList"> </list> 
+      <video-list v-if="isList" :videoList="videoList" @getVideoList="getVideoList"> </video-list> 
       <md-read v-else :desc="desc"></md-read>
     </el-col>
   </el-row>
@@ -27,13 +26,13 @@
 </template>
 <script>
 import { getVideo, getVideos } from '../api/index.js'
-import List from '../components/list.vue'
+import VideoList from '../components/video-list.vue'
 import BasicVideo from '../components/basic-video.vue'
 import MdRead from '../components/md-read.vue'
 export default {
   name: 'Watch',
   components: { 
-    "list" : List,
+    "video-list" : VideoList,
     "basic-video":BasicVideo,
     "md-read":MdRead
   },
@@ -68,15 +67,14 @@ export default {
         }else{
           this.isList = true;
         }
-        
       }catch(err){
         console.log(err)
       }
     },
     async getVideoList(){
        try{
-          const response = await getVideos();
-          this.videoList = response.data.Items
+        const response = await getVideos();
+        this.videoList = response.data.Items
       }catch(err){
         console.log(err)
       }

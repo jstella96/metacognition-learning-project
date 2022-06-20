@@ -5,14 +5,8 @@
 </template>
 
 <script>
-
 export default {
   name: 'BasicVideo',
-  data(){
-    return{   
-      
-    }
-  },
   props:{
     videoKey:String
   },
