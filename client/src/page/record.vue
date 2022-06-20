@@ -27,8 +27,7 @@ import ControlBottom from '../components/control-bottom.vue'
 import MdScript from '../components/md-script.vue'
 import RecordVideo from '../components/recode-video.vue'
 import MenuBottom from '../components/menu-bottom.vue'
-import AWS from 'aws-sdk'
-
+import {uploadS3} from '../api/s3.js'
 import axios from 'axios'
 export default {
   name: 'Watch',
@@ -65,32 +64,12 @@ export default {
     changeDesc(nextDesc){
       this.desc = nextDesc
     },
-    async uploadS3(blob,fileName){
-      AWS.config.update({
-        region: process.env.VUE_APP_BUCKET_REGION,
-        credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID
-      })
-      });
-      const s3 = new AWS.S3({
-        apiVersion: '2006-03-01',
-        params: {Bucket: process.env.VUE_APP_BUCKET_NAME}
-      });
-      const params = {
-        Key: fileName,
-        Body: blob,
-        ACL: 'public-read'
-        }
-      const stored = await s3.upload(params).promise();
-      return stored.key
-      
-    },
     async getThumbnailKey(){
       try{
         const $canvas = document.getElementById('canvas');
         const blob = await new Promise(resolve => $canvas.toBlob(resolve));
         const fileName = `${new Date().getTime()}.png`
-        this.thumbnailKey = await this.uploadS3(blob,fileName);
+        this.thumbnailKey = await uploadS3(blob,fileName);
       }catch(err){
         console.log(err)
       }
