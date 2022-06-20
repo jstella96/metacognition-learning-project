@@ -6,8 +6,7 @@
 
 <script>
 
-import AWS from 'aws-sdk'
-
+import {uploadS3} from '../api/s3.js'
 export default {
   name: 'RecodeVideo',
   data(){
@@ -82,31 +81,10 @@ export default {
         this.$video.controls = true;
       }
     },
-     upload(){
-      AWS.config.update({
-        region: process.env.VUE_APP_BUCKET_REGION,
-        credentials: new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID
-        })
-      });
-
-      const s3 = new AWS.S3({
-        apiVersion: '2006-03-01',
-        params: {Bucket: process.env.VUE_APP_BUCKET_NAME}
-      });
-
-      const fileName = `${new Date().getTime()}.webm`
-       s3.upload({
-        Key: fileName,
-        Body: this.blob,
-        ACL: 'public-read'
-        }, (err, data) => {
-        if (err) {
-          console.log(err)
-        }
-        console.log(err)
-        this.$emit('putVideoInfo',data.key);
-      });
+    async upload(){
+        const fileName = `${new Date().getTime()}.webm`
+        const key = await uploadS3(this.blob, fileName)
+        this.$emit('putVideoInfo',key);
     },
   },
   watch: {
@@ -122,7 +100,7 @@ export default {
       }else if(nextState === 'stop'){
         this.stop()
       }else if(nextState === 'upload'){
-        this.upload()
+        this.upload();
       }
     }
   }
