@@ -19,14 +19,14 @@
       <div class="right-side__header">
       <button @click="changeLeftSide" >{{ isList ? "NOTE" : "LIST" }}</button>
       </div>
-      <list v-if="isList" :videoList="videoList" @getVideos="getVideos"> </list> 
+      <list v-if="isList" :videoList="videoList" @getVideoList="getVideoList"> </list> 
       <md-read v-else :desc="desc"></md-read>
     </el-col>
   </el-row>
 </div>
 </template>
 <script>
-import axios from 'axios'
+import { getVideo, getVideos } from '../api/index.js'
 import List from '../components/list.vue'
 import BasicVideo from '../components/basic-video.vue'
 import MdRead from '../components/md-read.vue'
@@ -54,14 +54,14 @@ export default {
   },
   created(){
     this.startup()
-    this.getVideos()
+    this.getVideoList()
   },
   methods: {
     async startup(){
       try{
-        const id = this.$route.params.id
-        if(id){
-          const response = await axios.get(`/api/videos/${id}`);
+        const videoId = this.$route.params.id
+        if(videoId){
+          const response = await  getVideo(videoId);
           this.videoKey = response.data.Item.videoKey
           this.desc = response.data.Item.desc
           this.isList = false;
@@ -73,9 +73,9 @@ export default {
         console.log(err)
       }
     },
-    async getVideos(){
+    async getVideoList(){
        try{
-          const response = await axios.get(`/api/videos`);
+          const response = await getVideos();
           this.videoList = response.data.Items
       }catch(err){
         console.log(err)

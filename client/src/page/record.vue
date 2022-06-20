@@ -9,7 +9,7 @@
   </el-row>
   <el-row  type="flex"  justify="center">
     <el-col :span="14" class="left-side">
-        <record-video ref="recordVideo" :state="state" @putVideoInfo="putVideoInfo"></record-video>
+        <record-video ref="recordVideo" :state="state" @putVideoData="putVideoData"></record-video>
         <control-bottom v-if="state !== 'stop' && state !== 'upload'" :state="state" @changeState="changeState"></control-bottom>
         <menu-bottom v-else :state="state" @changeState="changeState"  @capture="capture"></menu-bottom>
     </el-col>
@@ -27,8 +27,9 @@ import ControlBottom from '../components/control-bottom.vue'
 import MdScript from '../components/md-script.vue'
 import RecordVideo from '../components/recode-video.vue'
 import MenuBottom from '../components/menu-bottom.vue'
-import {uploadS3} from '../api/s3.js'
-import axios from 'axios'
+import { uploadS3 } from '../api/s3.js'
+import { putVideo } from '../api/index.js'
+
 export default {
   name: 'Watch',
   components: { 
@@ -51,12 +52,8 @@ export default {
       height: 70
     }
   },
-  mounted(){
-
-  },
-  created(){
-   
-  },
+  mounted(){},
+  created(){},
   methods: {
     changeState(nextState){
       this.state = nextState;
@@ -65,24 +62,23 @@ export default {
       this.desc = nextDesc
     },
     async getThumbnailKey(){
-      try{
         const $canvas = document.getElementById('canvas');
         const blob = await new Promise(resolve => $canvas.toBlob(resolve));
         const fileName = `${new Date().getTime()}.png`
         this.thumbnailKey = await uploadS3(blob,fileName);
+    },
+    async putVideoData(videoKey){    
+      try{   
+        await this.getThumbnailKey();
+        const { thumbnailKey, desc ,title} = this;
+        const createDate = new Date();
+        const id =  String( createDate.getTime() ); 
+        const videoData = {id, desc, videoKey, title,thumbnailKey,createDate};
+        await putVideo(videoData);
+        this.$router.replace(`watch/${id}`)
       }catch(err){
         console.log(err)
-      }
-    },
-    async putVideoInfo(videoKey){       
-      await this.getThumbnailKey();
-      const { thumbnailKey, desc ,title} = this;
-      const createDate = new Date();
-      let id = new Date().getTime(); 
-      id = String(id)
-      const body = {id, desc, videoKey, title,thumbnailKey,createDate};
-      await axios.put(`/api/videos`,body);
-      this.$router.replace(`watch/${id}`)
+      }  
     },
     capture(){
       const $canvas = document.getElementById('canvas');
