@@ -45,7 +45,8 @@ export default {
       editor:null,
       chunks:[],
       videoKey: '',
-      desc: ``
+      desc: ``,
+      title:''
     }
   },
   mounted(){
@@ -64,7 +65,9 @@ export default {
           const response = await  getVideo(videoId);
           this.videoKey = response.data.Item.videoKey
           this.desc = response.data.Item.desc
+          this.title = response.data.Item.title
           this.isList = false;
+          
         }else{
           this.isList = true;
         }
