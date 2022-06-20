@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 import {uploadS3} from '../api/s3.js'
 export default {
   name: 'RecodeVideo',
@@ -84,7 +83,7 @@ export default {
     async upload(){
         const fileName = `${new Date().getTime()}.webm`
         const key = await uploadS3(this.blob, fileName)
-        this.$emit('putVideoInfo',key);
+        this.$emit('putVideoData',key);
     },
   },
   watch: {

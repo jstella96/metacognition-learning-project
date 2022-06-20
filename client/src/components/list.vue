@@ -13,7 +13,7 @@
                     <div class="card__info">
                         <span>{{video.createDate}}</span> | <span>1분28초</span>
                    </div>
-                   <button class="delete-button" @click="deleteVideo(video.id)"><i class="el-icon-delete"></i></button>
+                   <button class="delete-button" @click="deleteItem(video.id)"><i class="el-icon-delete"></i></button>
                 </el-col>
             </router-link>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { deleteVideo } from '../api/index.js'
 export default {
   computed:{
 
@@ -34,11 +34,10 @@ export default {
     getSrc(thumbnailKey){
       return `${process.env.VUE_APP_BUCKET_POINT}/${thumbnailKey}`
     },
-    async deleteVideo(id){
-      //백엔드에서 내부적으로 s3에 있는 데이터 이동시킴
+    async deleteItem(videoId){
       try{
-            await axios.delete(`/api/videos/${id}`);
-          this.$emit("getVideos")
+          await deleteVideo(videoId)
+          this.$emit("getVideoList")
       }catch(err){
         console.log(err)
       }
