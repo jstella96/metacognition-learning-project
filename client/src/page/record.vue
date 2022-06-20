@@ -47,7 +47,9 @@ export default {
       desc: '',
       title:'',
       videoKey: '',
-      thumbnailKey: ''
+      thumbnailKey: '',
+      width: 120,
+      height: 70
     }
   },
   mounted(){
@@ -65,8 +67,8 @@ export default {
     },
     async uploadS3(blob,fileName){
       AWS.config.update({
-      region: process.env.VUE_APP_BUCKET_REGION,
-      credentials: new AWS.CognitoIdentityCredentials({
+        region: process.env.VUE_APP_BUCKET_REGION,
+        credentials: new AWS.CognitoIdentityCredentials({
         IdentityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID
       })
       });
@@ -83,26 +85,21 @@ export default {
       return stored.key
       
     },
-    async putVideoInfo(videoKey){
-      this.videoKey = videoKey
+    async getThumbnailKey(){
       try{
         const $canvas = document.getElementById('canvas');
+        const blob = await new Promise(resolve => $canvas.toBlob(resolve));
         const fileName = `${new Date().getTime()}.png`
-        await $canvas.toBlob( async (blob) => {
-          this.thumbnailKey = await this.uploadS3(blob,fileName)
-          await this.putVideo();
-        });
+        this.thumbnailKey = await this.uploadS3(blob,fileName);
       }catch(err){
         console.log(err)
       }
     },
-    async putVideo(){
-      const thumbnailKey = this.thumbnailKey
-      const videoKey =  this.videoKey
-      const desc = this.desc;
-      const title = this.title;
+    async putVideoInfo(videoKey){       
+      await this.getThumbnailKey();
+      const { thumbnailKey, desc ,title} = this;
       const createDate = new Date();
-      let id = new Date().getTime(); // uuid 로 변경
+      let id = new Date().getTime(); 
       id = String(id)
       const body = {id, desc, videoKey, title,thumbnailKey,createDate};
       await axios.put(`/api/videos`,body);
@@ -110,12 +107,11 @@ export default {
     },
     capture(){
       const $canvas = document.getElementById('canvas');
-    
       const $video  = document.getElementById('record-video');
       const context = $canvas.getContext('2d');
-      $canvas.width = 120;
-      $canvas.height = 70;
-      context.drawImage($video, 0, 0, 120, 70);
+      $canvas.width = this.width;
+      $canvas.height = this.height;
+      context.drawImage($video, 0, 0, this.width, this.height);
     }
   }
 }
